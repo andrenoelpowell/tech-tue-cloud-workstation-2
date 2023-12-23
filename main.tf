@@ -13,6 +13,12 @@ variable "aws_profile" {
 variable "aws_pem" {
   description = "The PEM file to use for SSH. This is outputted with the IP for convenience"
 }
+
+variable "alt_rdp_source_ip" {
+  description = "An additional IP address from which to RDP"
+}
+
+
 provider "aws" {
   region                  = var.aws_region
   shared_credentials_files = [var.aws_creds_file]
@@ -106,6 +112,16 @@ resource "aws_security_group_rule" "sg-rdp" {
   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
   security_group_id = aws_security_group.work-sg.id
 }
+
+resource "aws_security_group_rule" "sg-rdp2" {
+  type              = "ingress"
+  from_port         = 3389
+  to_port           = 3389
+  protocol          = "tcp"
+  cidr_blocks       = [var.alt_rdp_source_ip]
+  security_group_id = aws_security_group.work-sg.id
+}
+
 
 resource "aws_security_group_rule" "allow_all" {
   type              = "egress"
