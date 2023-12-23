@@ -19,6 +19,29 @@ cd tech-tue-cloud-workstation-2
 
 Next modify the `terraform.tfvars` contents with the settings that are appropriate
 for your AWS Account.
+Need to update with:
+
+Create a new IAM User
+
+Navigate to the IAM Service in the AWS Web Console
+Click on Users and then Add user
+Create a new user named "tech-tuesday" and click only the "Programmatic acess" checkbox.
+Click the blue Next: Permissions button.
+Click the Attach existing policies directly button and click the checkbox to the right of the "AdministratorAccess policy." Click the blue Next: Tags button.
+Click the blue Create user button.
+Copy the Access key ID to a temporary text file (Don't even save this file.)
+Click the Show hyperlink to expose the Secret Access key. Copy this to the temporary text file as well. Click the Close button.
+
+Configure the User Profile in the CloudShell
+
+Navigate back to the AWS CloudShell. Click to plant your curser in the Cloudshell terminal.
+Enter the command aws configure --profile myterraform into the CloudShell and press enter.
+Next paste in the Access key ID from the temporary text file and then the Secret Access Key.
+Enter us-east-1 for the Default region name and json for the Default output format.
+Test it by running the following command in the terminal: aws sts get-caller-identity
+Did you get the results you expected? This command shows the user that you logged into the web console with and not the user that we just created.
+
+Let's run it again, with the profile specified: aws sts get-caller-identity --profile myterraform
 
 Now run these commands:
 
