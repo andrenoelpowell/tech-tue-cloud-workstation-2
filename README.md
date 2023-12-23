@@ -4,6 +4,9 @@ installed. An example use case if a temporary sandbox system for surfing potenti
 dangerous websites. _NOTE: Don't break the law, as AWS Terms of Service still apply
 and this is not exactly covert._
 
+Create SSH Key Pair https://github.com/Resistor52/terraform-cloud-workstation/blob/main/workbook/Step_05.md
+
+
 ## DEPLOYMENT
 Git clone the repository and provision the cloud workstation by running the following
 commands, one at a time:
